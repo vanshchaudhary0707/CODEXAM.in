@@ -23,6 +23,29 @@ import { CodexamLogin } from "./components/CodexamLogin";
 import { 
   Plus, 
   History, 
+  // Helper to clean and decode messy raw text fragments out of extracted data
+export function cleanQuestionText(rawText: string): string {
+  if (!rawText) return "";
+  return rawText
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\\n/g, '\n')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Custom hook to automatically surface contextual questions based on the active draft setting
+export function useSmartContextFilter(questions: any[], activeClass: string, activeSubject: string) {
+  return questions.filter(q => {
+    const classMatch = activeClass ? q.classLevel?.toLowerCase() === activeClass.toLowerCase() : true;
+    const subjectMatch = activeSubject ? q.subject?.toLowerCase() === activeSubject.toLowerCase() : true;
+    return classMatch && subjectMatch;
+  });
+}
+
   Trash2, 
   BookOpen, 
   Eye, 

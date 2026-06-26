@@ -822,3 +822,41 @@ export const CURRICULUM_DATABASE: ClassCurriculum[] = Array.from({ length: 12 },
     subjects
   };
 });
+export const AVAILABLE_CLASSES = [
+  "Class 2nd",
+  "Class 3rd",
+  "Class 4th",
+  "Class 5th",
+  "Class 6th",
+  "Class 7th",
+  "Class 8th",
+  "Class 9th",
+  "Class 10th",
+  "Class 11th",
+  "Class 12th",
+  "Class XII (Senior Secondary)"
+];
+
+export const CURRICULUM_SUBJECTS = [
+  "English Grammar and Passage",
+  "Maths",
+  "Science",
+  "Social Science",
+  "Accountancy",
+  "Accounts"
+];
+
+export const CURRICULUM_DATA: Record<string, Record<string, string[]>> = {
+  // We initialize fallback chapters so the generator never crashes on your new classes
+  ...AVAILABLE_CLASSES.reduce((acc, cls) => {
+    acc[cls] = {
+      "English Grammar and Passage": ["Nouns and Pronouns", "Verbs and Tenses", "Reading Comprehension Passages", "Vocabulary and Synonyms"],
+      "Maths": ["Numbers and Arithmetic", "Basic Geometry", "Fractions and Decimals", "Data Handling"],
+      "Science": ["Living and Non-Living Things", "Plants and Animals", "Matter and Materials", "Force and Energy"],
+      "Social Science": ["Our Environment", "Maps and Globes", "History and Culture", "Civics and Society"],
+      "Accountancy": ["Accounting for Partnership Firms", "Reconstitution of Partnership", "Dissolution of Partnership Firm", "Accounting for Share Capital", "Financial Statements Analysis"],
+      "Accounts": ["Accounting for Partnership Firms", "Reconstitution of Partnership", "Dissolution of Partnership Firm", "Accounting for Share Capital", "Financial Statements Analysis"]
+    };
+    return acc;
+  }, {} as Record<string, Record<string, string[]>>)
+};
